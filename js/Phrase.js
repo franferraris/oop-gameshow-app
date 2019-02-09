@@ -32,13 +32,6 @@ class Phrase {
 		} else {
 			checkLetter.forEach((e) => e.classList.add('show'));
 			checkLetter.forEach((e) => e.classList.remove('hide'));
-			return checkLetter;
 		}
 	}
 }
-
-const startPhrase = new Phrase ('test');
-
-// test.addPhraseToDisplay(test.phrase);
-
-// test.showMatchedLetter(test.checkLetter('a'));
