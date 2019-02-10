@@ -6,13 +6,18 @@ class Game {
 	constructor () {
 		this.missed = 0;
 		this.phrases = [
-			'This is a test',
-			'This is also a test',
-			'I am tired of tests',
-			'And clases are confusing',
-			'But I have to do this'
+			'Focaccia genovese',
+			'Pasta alla Norma',
+			'Ragu alla bolognese',
+			'Mozzarella di bufala',
+			'Panino con la Porchetta',
+			'Bagna cauda',
+			'Risotto alla milanese',
+			'Impepata di cozze',
+			'Pizza con la nduja'
 		];
 		this.activePhrase = null;
+		this.activeIndex = null;
 	}
 
 	startGame () {
@@ -23,6 +28,8 @@ class Game {
 		});
 		this.missed = 0;
 		document.querySelectorAll('#scoreboard img').forEach((e) => e.setAttribute('src', 'images/liveHeart.png'));
+		document.querySelector('#help-message').innerText = 'You can also use your keyboard :-D';
+		document.querySelector('#help-message').style.color = '#4d85be';
 		document.querySelector('#overlay').style.display = 'none';
 		this.activePhrase = new Phrase (this.getRandomPhrase());
 		console.log(this.activePhrase.phrase)
@@ -30,21 +37,44 @@ class Game {
 	}
 
 	getRandomPhrase () {
-		return this.phrases[Math.floor(Math.random() * this.phrases.length)];
+		let newIndex;
+		do {
+			newIndex = Math.floor(Math.random() * this.phrases.length);
+		} while (newIndex === this.activeIndex);
+		this.activeIndex = newIndex;
+		document.body.style.background = this.getRandomColor();
+		return this.phrases[this.activeIndex];
+	}
+
+	getRandomColor() {
+	var hexValues = "ABCD";
+	var color = "#";
+	for (var i = 0; i < 3; i++) {
+		color += hexValues[Math.floor(Math.random() * hexValues.length)];
+	}
+	return color;
 	}
 
 	handleInteraction (letter) {
-		let clickedLetter = this.activePhrase.showMatchedLetter(this.activePhrase.checkLetter(letter.innerText));
-		if ( clickedLetter === 'No guess') {
+		let inputLetter = this.activePhrase.showMatchedLetter(this.activePhrase.checkLetter(letter.innerText));
+
+		if (letter.disabled === true) {
+			document.querySelector('#help-message').innerText = 'You already selected that letter';
+			document.querySelector('#help-message').style.color = 'Goldenrod';
+		} else if ( inputLetter === 'No guess' && letter.disabled === false ) {
 			letter.disabled = true;
 			letter.classList.add('wrong');
 			this.removeLife();
-			console.log(this.missed);
-		} else {
+			document.querySelector('#help-message').innerText = 'Oops :-(';
+			document.querySelector('#help-message').style.color = 'IndianRed';
+		} else if (inputLetter !== undefined) {
 			letter.disabled = true;
 			letter.classList.add('chosen');
+			document.querySelector('#help-message').innerText = 'Good!'
+			document.querySelector('#help-message').style.color = '#41583a';
 		}
-		if (this.checkForWin() === true) {
+
+		if (this.checkForWin()) {
 			this.gameOver('win', 'You won the game!')
 		}
 	}

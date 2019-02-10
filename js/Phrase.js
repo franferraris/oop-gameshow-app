@@ -32,6 +32,7 @@ class Phrase {
 		} else {
 			checkLetter.forEach((e) => e.classList.add('show'));
 			checkLetter.forEach((e) => e.classList.remove('hide'));
+			return checkLetter;
 		}
 	}
 }
