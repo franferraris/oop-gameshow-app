@@ -28,8 +28,6 @@ class Game {
 			e.classList = 'key';
 			e.disabled = false;
 		});
-		this.missed = 0;
-		document.querySelectorAll('#scoreboard img').forEach((e) => e.setAttribute('src', 'images/liveHeart.png'));
 		document.querySelector('#help-message').innerText = 'You can also use your keyboard :-D';
 		document.querySelector('#help-message').style.color = '#4d85be';
 		document.querySelector('#overlay').style.display = 'none';
@@ -112,6 +110,8 @@ class Game {
 			document.querySelector('#win-counter').style.display = 'block';
 			document.querySelector('#win-number').innerHTML = this.usedIndexes.length;
 		} else if (result === 'victory' || result=== 'lose') {
+			this.missed = 0;
+			document.querySelectorAll('#scoreboard img').forEach((e) => e.setAttribute('src', 'images/liveHeart.png'));
 			document.querySelector('#win-counter').style.display = 'none';
 			this.usedIndexes = [];
 		}
