@@ -16,6 +16,9 @@ document.querySelectorAll('.key')
 })
 
 document.addEventListener('keypress', (event) => {
+	if (document.querySelector('#overlay').style.display === '' && event.key === 'Enter' ) {
+		newGame.startGame();
+	}
 	document.querySelectorAll('.key').
 	forEach((e) => {
 		if (e.innerHTML === event.key.toLowerCase()) {

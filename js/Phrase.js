@@ -27,12 +27,10 @@ class Phrase {
 	}
 
 	showMatchedLetter(checkLetter) {
-		if (checkLetter.length === 0) {
-			return 'No guess';
-		} else {
+		if (checkLetter.length > 0) {
 			checkLetter.forEach((e) => e.classList.add('show'));
 			checkLetter.forEach((e) => e.classList.remove('hide'));
-			return checkLetter;
 		}
+		return checkLetter;
 	}
 }
