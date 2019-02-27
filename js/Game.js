@@ -106,7 +106,6 @@ class Game {
 	/* Verifies if customer won the game if all letters are shown and creates "Victory" if all phrases were guessed */
 	checkForWin() {
 		if (!document.querySelector('.letter.hide') && this.usedIndexes.length === this.phrases.length) {
-			//document.querySelector('.title').innerHTML = "You finished the game!";
 			return 'victory';
 		} else if (!document.querySelector('.letter.hide')) {
 			return 'win';
