@@ -3,11 +3,13 @@
  * app.js */
 const newGame = new Game ();
 
+// Click on button starts the game
 document.querySelector('#btn__reset')
  .addEventListener('click', () => {
  	newGame.startGame();
  })
 
+// Event listener clicking on buttons
 document.querySelectorAll('.key')
 .forEach((e) => {
 	e.addEventListener('click', (event) => {
@@ -15,6 +17,7 @@ document.querySelectorAll('.key')
 	})
 })
 
+// Event listener on keypress. Enter starts/continues game while keys work the same as clicking on the buttons.
 document.addEventListener('keypress', (event) => {
 	if (document.querySelector('#overlay').style.display === '' && event.key === 'Enter' ) {
 		newGame.startGame();
