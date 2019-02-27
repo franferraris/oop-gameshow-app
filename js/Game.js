@@ -4,9 +4,9 @@
 
 class Game {
 	constructor () {
-		// Stores the number of mistakes the User has made	
+		// Stores the number of mistakes the User has made
 		this.missed = 0;
-		// Stores all the phrases. All program adapts to any length of array.	
+		// Stores all the phrases. All program adapts to any length of array.
 		this.phrases = [
 			new Phrase('Deep Purple'),
 			new Phrase('The Rolling Stones'),
@@ -25,7 +25,7 @@ class Game {
 		this.usedIndexes = [];
 	}
 
-	/* Resets all values for a new game except the lifecount since the life total remains fixed even if you win: 
+	/* Resets all values for a new game except the lifecount since the life total remains fixed even if you win:
 	   Title, empties phrase Unordered List, resets used keys, Help Message and removes overlay
 	   It sets the Active Phrase and prints it on the screen */
 	startGame () {
@@ -42,7 +42,7 @@ class Game {
 	}
 
 	/* Gets a random phrase that is always different from the previous one and pushes it on the usedIndexes array
-	   It also calls the randomColor method to change the background every game */	
+	   It also calls the randomColor method to change the background every game */
 	getRandomPhrase () {
 		let newIndex;
 		do {
