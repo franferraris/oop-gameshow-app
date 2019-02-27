@@ -29,7 +29,6 @@ class Game {
 	   Title, empties phrase Unordered List, resets used keys, Help Message and removes overlay
 	   It sets the Active Phrase and prints it on the screen */
 	startGame () {
-		document.querySelector('.title').innerHTML = "Guess the Rock Band";
 		document.querySelector('#phrase ul').innerHTML = '';
 		document.querySelectorAll('.key').forEach((e) => {
 			e.classList = 'key';
@@ -89,7 +88,7 @@ class Game {
 		}
 
 		if (this.checkForWin() === 'win') {
-			this.gameOver('win', `You guessed ${this.activePhrase.phrase.toUpperCase()}!`, 'Continue')
+			this.gameOver('win', 'Keep playing to win the game!', 'Continue')
 		} else if (this.checkForWin() === 'victory') {
 			this.gameOver('victory', `You guessed all ${this.phrases.length} bands!`, 'Play Again!')
 		}
@@ -100,14 +99,14 @@ class Game {
 		document.querySelectorAll('#scoreboard img')[this.missed].setAttribute('src', 'images/lostHeart.png')
 		this.missed ++;
 		if (this.missed > 4) {
-			this.gameOver('lose', 'You lost the game!', 'Try Again!');
+			this.gameOver('lose', 'You ran out of lives', 'Try Again!');
 		}
 	}
 
 	/* Verifies if customer won the game if all letters are shown and creates "Victory" if all phrases were guessed */
 	checkForWin() {
 		if (!document.querySelector('.letter.hide') && this.usedIndexes.length === this.phrases.length) {
-			document.querySelector('.title').innerHTML = "You finished the game!";
+			//document.querySelector('.title').innerHTML = "You finished the game!";
 			return 'victory';
 		} else if (!document.querySelector('.letter.hide')) {
 			return 'win';
@@ -124,6 +123,7 @@ class Game {
 		document.querySelector('#game-over-message').innerHTML = message;
 		document.querySelector('#btn__reset').innerHTML = button;
 		if (result === 'win') {
+			document.querySelector('.title').innerHTML = `You guessed ${this.activePhrase.phrase.toUpperCase()}!`;
 			document.querySelector('#win-counter').style.display = 'block';
 			document.querySelector('#win-number').innerHTML = this.usedIndexes.length;
 		} else if (result === 'victory' || result=== 'lose') {
@@ -131,6 +131,11 @@ class Game {
 			document.querySelectorAll('#scoreboard img').forEach((e) => e.setAttribute('src', 'images/liveHeart.png'));
 			document.querySelector('#win-counter').style.display = 'none';
 			this.usedIndexes = [];
+		}
+		if (result === 'victory') {
+				document.querySelector('.title').innerHTML = 'You finished the game!';
+		} else if (result === 'lose') {
+				document.querySelector('.title').innerHTML = 'You lost the game!';
 		}
 	}
 
